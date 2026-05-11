@@ -249,7 +249,7 @@ export function Team() {
           {team.map((member) => (
             <div
               key={member.name}
-              className="group relative overflow-hidden cursor-pointer"
+              className="group relative overflow-hidden cursor-pointer flex flex-col"
               style={{
                 width: "260px",
                 background: "rgba(255,255,255,0.025)",
@@ -305,7 +305,7 @@ export function Team() {
               </div>
 
               {/* Content */}
-              <div className="p-6">
+              <div className="p-6 flex flex-col flex-1">
                 <div style={{ height: "1px", background: "rgba(125,191,164,0.12)" }} className="mb-5" />
 
                 {/* Years stat */}
@@ -368,7 +368,7 @@ export function Team() {
 
                 {/* Read bio hint */}
                 <div
-                  className="mt-5 flex items-center gap-2"
+                  className="mt-auto pt-5 flex items-center gap-2"
                   style={{
                     fontFamily: "'Candara', sans-serif",
                     color: "rgba(125,191,164,0.5)",

@@ -181,7 +181,7 @@ export function Services() {
                           style={{
                             fontFamily: "'Candara', sans-serif",
                             color: "rgba(255,255,255,0.35)",
-                            fontSize: "13px",
+                            fontSize: "15px",
                             lineHeight: 1.7,
                           }}
                         >
