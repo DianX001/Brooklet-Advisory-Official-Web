@@ -1,7 +1,10 @@
 import { ChevronDown } from "lucide-react";
 import ConceptMap from "../../imports/concept_map.jpg";
+import { motion, useReducedMotion } from "motion/react";
 
 export function Hero() {
+  const shouldReduceMotion = useReducedMotion();
+
   const scrollToAbout = () => {
     document.querySelector("#about")?.scrollIntoView({ behavior: "smooth" });
   };
@@ -79,7 +82,33 @@ export function Hero() {
             letterSpacing: "-0.01em",
             textShadow: "0 2px 18px rgba(8,18,10,0.8), 0 1px 4px rgba(8,18,10,0.6)",
           }}
-        >Where Clarity<br /><em style={{ fontStyle: "italic", color: "#9DCFBC" }}>Flows</em></h1>
+        >
+          <motion.span
+            className="block"
+            initial={{ opacity: shouldReduceMotion ? 1 : 0, y: shouldReduceMotion ? 0 : 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              duration: shouldReduceMotion ? 0 : 1.2,
+              ease: [0.16, 1, 0.3, 1],
+              delay: shouldReduceMotion ? 0 : 0.4
+            }}
+          >
+            Where Clarity
+          </motion.span>
+          <motion.em
+            className="block"
+            initial={{ opacity: shouldReduceMotion ? 1 : 0, y: shouldReduceMotion ? 0 : 20, scale: shouldReduceMotion ? 1 : 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{
+              duration: shouldReduceMotion ? 0 : 1.2,
+              ease: [0.16, 1, 0.3, 1],
+              delay: shouldReduceMotion ? 0 : 0.4
+            }}
+            style={{ fontStyle: "italic", color: "#9DCFBC" }}
+          >
+            Flows
+          </motion.em>
+        </h1>
 
         {/* Tagline */}
         <p

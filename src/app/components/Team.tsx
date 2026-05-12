@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import ThomasImg from "../../imports/TU.jpg";
 import BenImg from "../../imports/BL.png";
+import { motion, useReducedMotion } from "motion/react";
 
 const team = [
   {
@@ -202,6 +203,7 @@ function BioModal({
 
 export function Team() {
   const [activeMember, setActiveMember] = useState<TeamMember | null>(null);
+  const shouldReduceMotion = useReducedMotion();
 
   return (
     <section id="team" className="py-24 md:py-32" style={{ background: DARK_BG }}>
@@ -219,7 +221,7 @@ export function Team() {
             </span>
             <div className="h-px w-10 bg-[#7DBFA4]/25" />
           </div>
-          <h2
+          <motion.h2
             className="text-white"
             style={{
               fontFamily: "'Candara', sans-serif",
@@ -227,9 +229,16 @@ export function Team() {
               fontWeight: 300,
               lineHeight: 1.2,
             }}
+            initial={{ opacity: shouldReduceMotion ? 1 : 0, y: shouldReduceMotion ? 0 : 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-10%" }}
+            transition={{
+              duration: shouldReduceMotion ? 0 : 0.9,
+              ease: [0.16, 1, 0.3, 1],
+            }}
           >
             Leadership Team
-          </h2>
+          </motion.h2>
           <p
             className="mt-4 max-w-lg mx-auto"
             style={{

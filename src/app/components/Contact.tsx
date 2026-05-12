@@ -1,6 +1,7 @@
 import { useState } from "react";
 import emailjs from "@emailjs/browser";
 import { Mail, MapPin, Phone, Send } from "lucide-react";
+import { motion, useReducedMotion } from "motion/react";
 
 const LIGHT_BG = "#EDF2EE";
 const DARK_PANEL = "#1E3428";
@@ -10,6 +11,7 @@ const EMAILJS_TEMPLATE_ID = "template_2h0v1v4";
 const EMAILJS_PUBLIC_KEY = "FoqlEL1hKlso76VtX";
 
 export function Contact() {
+  const shouldReduceMotion = useReducedMotion();
   const [formData, setFormData] = useState({
     name: "",
     company: "",
@@ -95,7 +97,7 @@ export function Contact() {
             </span>
             <div className="h-px w-10 bg-[#3E8A72]/40" />
           </div>
-          <h2
+          <motion.h2
             style={{
               fontFamily: "'Candara', sans-serif",
               fontSize: "35px",
@@ -103,9 +105,16 @@ export function Contact() {
               lineHeight: 1.2,
               color: "#0D1F0E",
             }}
+            initial={{ opacity: shouldReduceMotion ? 1 : 0, y: shouldReduceMotion ? 0 : 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-10%" }}
+            transition={{
+              duration: shouldReduceMotion ? 0 : 0.9,
+              ease: [0.16, 1, 0.3, 1],
+            }}
           >
             Begin the Conversation
-          </h2>
+          </motion.h2>
           <p
             className="mt-4 max-w-md mx-auto"
             style={{

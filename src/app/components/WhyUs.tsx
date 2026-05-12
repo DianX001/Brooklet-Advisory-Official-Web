@@ -1,3 +1,5 @@
+import { motion, useReducedMotion } from "motion/react";
+
 const edges = [
   {
     number: "-01",
@@ -26,6 +28,8 @@ const edges = [
 ];
 
 export function WhyUs() {
+  const shouldReduceMotion = useReducedMotion();
+  
   return (
     <section id="why-us" className="py-24 md:py-32" style={{ background: "#EDF2EE" }}>
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
@@ -55,7 +59,28 @@ export function WhyUs() {
                 color: "#0D1F0E",
               }}
             >
-              Why <em style={{ fontStyle: "italic", color: "#3E8A72" }}>Brooklet?</em>
+              <motion.span
+                className="block"
+                initial={{ opacity: shouldReduceMotion ? 1 : 0, y: shouldReduceMotion ? 0 : 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-10%" }}
+                transition={{
+                  duration: shouldReduceMotion ? 0 : 0.9,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
+              >
+                Why <motion.em
+                initial={{ opacity: shouldReduceMotion ? 1 : 0, y: shouldReduceMotion ? 0 : 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-10%" }}
+                transition={{
+                  duration: shouldReduceMotion ? 0 : 0.9,
+                  ease: [0.16, 1, 0.3, 1],
+                  delay: shouldReduceMotion ? 0 : 0.2
+                }}
+                style={{ fontStyle: "italic", color: "#3E8A72", display: "inline-block" }}
+              >Brooklet?</motion.em>
+              </motion.span>
             </h2>
 
             <p

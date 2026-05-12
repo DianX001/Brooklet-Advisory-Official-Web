@@ -1,4 +1,5 @@
 import { FileCheck, ShieldCheck, Search, Lightbulb } from "lucide-react";
+import { motion, useReducedMotion } from "motion/react";
 
 const services = [
   {
@@ -66,6 +67,8 @@ const services = [
 const DARK_BG = "#1E3428";
 
 export function Services() {
+  const shouldReduceMotion = useReducedMotion();
+  
   return (
     <section id="services" className="py-24 md:py-32" style={{ background: DARK_BG }}>
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
@@ -82,7 +85,7 @@ export function Services() {
             </span>
             <div className="h-px w-10 bg-[#7DBFA4]/25" />
           </div>
-          <h2
+          <motion.h2
             className="text-white"
             style={{
               fontFamily: "'Candara', sans-serif",
@@ -90,9 +93,16 @@ export function Services() {
               fontWeight: 300,
               lineHeight: 1.2,
             }}
+            initial={{ opacity: shouldReduceMotion ? 1 : 0, y: shouldReduceMotion ? 0 : 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-10%" }}
+            transition={{
+              duration: shouldReduceMotion ? 0 : 0.9,
+              ease: [0.16, 1, 0.3, 1],
+            }}
           >
             Our Services
-          </h2>
+          </motion.h2>
           <p
             className="mt-4 max-w-lg mx-auto"
             style={{

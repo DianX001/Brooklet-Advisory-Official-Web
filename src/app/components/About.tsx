@@ -1,11 +1,15 @@
+import { motion, useReducedMotion } from "motion/react";
+
 const stats = [
   { value: "140+", label: "Institutional Clients" },
   { value: "25+", label: "Years in Financial Industry" },
   { value: "4", label: "Regulatory Frameworks\n(SFC · HKEX · MAS · AMCM)" },
-  { value: "3", label: "Markets\n(HK · Mainland · Macao)" },
+  { value: "3", label: "Markets\n(Hong Kong, Macao, Mainland)" },
 ];
 
 export function About() {
+  const shouldReduceMotion = useReducedMotion();
+  
   return (
     <section id="about" className="py-24 md:py-32" style={{ background: "#EDF2EE" }}>
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
@@ -70,9 +74,32 @@ export function About() {
                 color: "#0C1810",
               }}
             >
-              Regulatory Expertise,
-              <br />
-              <em style={{ fontStyle: "italic", color: "#3E8A72" }}>Commercially Sound.</em>
+              <motion.span
+                className="block"
+                initial={{ opacity: shouldReduceMotion ? 1 : 0, y: shouldReduceMotion ? 0 : 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-10%" }}
+                transition={{
+                  duration: shouldReduceMotion ? 0 : 0.9,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
+              >
+                Regulatory Expertise,
+              </motion.span>
+              <motion.em
+                className="block"
+                initial={{ opacity: shouldReduceMotion ? 1 : 0, y: shouldReduceMotion ? 0 : 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-10%" }}
+                transition={{
+                  duration: shouldReduceMotion ? 0 : 0.9,
+                  ease: [0.16, 1, 0.3, 1],
+                  delay: shouldReduceMotion ? 0 : 0.2
+                }}
+                style={{ fontStyle: "italic", color: "#3E8A72" }}
+              >
+                Commercially Sound.
+              </motion.em>
             </h2>
 
             <p
