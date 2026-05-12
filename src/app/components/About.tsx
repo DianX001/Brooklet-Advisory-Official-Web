@@ -80,7 +80,7 @@ export function About() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-10%" }}
                 transition={{
-                  duration: shouldReduceMotion ? 0 : 0.9,
+                  duration: shouldReduceMotion ? 0 : 2.7,
                   ease: [0.16, 1, 0.3, 1],
                 }}
               >
@@ -92,9 +92,9 @@ export function About() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-10%" }}
                 transition={{
-                  duration: shouldReduceMotion ? 0 : 0.9,
+                  duration: shouldReduceMotion ? 0 : 2.7,
                   ease: [0.16, 1, 0.3, 1],
-                  delay: shouldReduceMotion ? 0 : 0.2
+                  delay: shouldReduceMotion ? 0 : 0.6
                 }}
                 style={{ fontStyle: "italic", color: "#3E8A72" }}
               >

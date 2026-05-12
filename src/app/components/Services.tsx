@@ -97,7 +97,7 @@ export function Services() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-10%" }}
             transition={{
-              duration: shouldReduceMotion ? 0 : 0.9,
+              duration: shouldReduceMotion ? 0 : 2.7,
               ease: [0.16, 1, 0.3, 1],
             }}
           >

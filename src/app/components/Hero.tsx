@@ -88,9 +88,9 @@ export function Hero() {
             initial={{ opacity: shouldReduceMotion ? 1 : 0, y: shouldReduceMotion ? 0 : 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{
-              duration: shouldReduceMotion ? 0 : 1.2,
+              duration: shouldReduceMotion ? 0 : 3.6,
               ease: [0.16, 1, 0.3, 1],
-              delay: shouldReduceMotion ? 0 : 0.4
+              delay: shouldReduceMotion ? 0 : 1.2
             }}
           >
             Where Clarity
@@ -100,9 +100,9 @@ export function Hero() {
             initial={{ opacity: shouldReduceMotion ? 1 : 0, y: shouldReduceMotion ? 0 : 20, scale: shouldReduceMotion ? 1 : 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{
-              duration: shouldReduceMotion ? 0 : 1.2,
+              duration: shouldReduceMotion ? 0 : 3.6,
               ease: [0.16, 1, 0.3, 1],
-              delay: shouldReduceMotion ? 0 : 0.4
+              delay: shouldReduceMotion ? 0 : 1.2
             }}
             style={{ fontStyle: "italic", color: "#9DCFBC" }}
           >
