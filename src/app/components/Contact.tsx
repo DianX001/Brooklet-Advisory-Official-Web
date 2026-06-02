@@ -1,8 +1,6 @@
 import { useState } from "react";
 import emailjs from "@emailjs/browser";
 import { Mail, MapPin, Phone, Send } from "lucide-react";
-import { motion, useReducedMotion } from "motion/react";
-import { useLanguage } from "../LanguageContext";
 
 const LIGHT_BG = "#EDF2EE";
 const DARK_PANEL = "#1E3428";
@@ -11,16 +9,14 @@ const EMAILJS_SERVICE_ID = "service_0qu7r0b";
 const EMAILJS_TEMPLATE_ID = "template_2h0v1v4";
 const EMAILJS_PUBLIC_KEY = "FoqlEL1hKlso76VtX";
 
-const infoIcons = [MapPin, Mail, Phone];
-
 export function Contact() {
-  const shouldReduceMotion = useReducedMotion();
-  const { t, lang } = useLanguage();
-  const c = t.contact;
-  const f = c.form;
-
   const [formData, setFormData] = useState({
-    name: "", company: "", email: "", phone: "", service: "", message: "",
+    name: "",
+    company: "",
+    email: "",
+    phone: "",
+    service: "",
+    message: "",
   });
   const [submitted, setSubmitted] = useState(false);
   const [sending, setSending] = useState(false);
@@ -37,8 +33,9 @@ export function Contact() {
     e.preventDefault();
     setErrorMsg(null);
 
+    // Validate required fields
     if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
-      setErrorMsg(f.validationError);
+      setErrorMsg("Please fill in all required fields: Full Name, Email Address, and Your Message.");
       return;
     }
 
@@ -61,7 +58,9 @@ export function Contact() {
       setSubmitted(true);
       setFormData({ name: "", company: "", email: "", phone: "", service: "", message: "" });
     } catch {
-      setErrorMsg(f.serverError);
+      setErrorMsg(
+        "Something went wrong. Please try again or contact us directly at info@brookletadvisory.com."
+      );
     } finally {
       setSending(false);
     }
@@ -92,11 +91,11 @@ export function Contact() {
               className="text-[#3E8A72] tracking-[0.32em] uppercase"
               style={{ fontFamily: "'Candara', sans-serif", fontSize: "14px" }}
             >
-              {c.label}
+              Get In Touch
             </span>
             <div className="h-px w-10 bg-[#3E8A72]/40" />
           </div>
-          <motion.h2
+          <h2
             style={{
               fontFamily: "'Candara', sans-serif",
               fontSize: "35px",
@@ -104,16 +103,9 @@ export function Contact() {
               lineHeight: 1.2,
               color: "#0D1F0E",
             }}
-            initial={{ opacity: shouldReduceMotion ? 1 : 0, y: shouldReduceMotion ? 0 : 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-10%" }}
-            transition={{
-              duration: shouldReduceMotion ? 0 : 2.7,
-              ease: [0.16, 1, 0.3, 1],
-            }}
           >
-            {c.h2}
-          </motion.h2>
+            Begin the Conversation
+          </h2>
           <p
             className="mt-4 max-w-md mx-auto"
             style={{
@@ -123,7 +115,8 @@ export function Contact() {
               lineHeight: 1.85,
             }}
           >
-            {c.subtitle}
+            Whether you have a specific compliance challenge or simply want to
+            explore how Brooklet can support your business, we'd love to hear from you.
           </p>
         </div>
 
@@ -133,8 +126,24 @@ export function Contact() {
           <div className="lg:col-span-2 space-y-10">
             <div>
               <div className="space-y-6">
-                {c.info.map((item, idx) => {
-                  const Icon = infoIcons[idx];
+                {[
+                  {
+                    icon: MapPin,
+                    label: "Office",
+                    detail: "Level 20, One IFC\nCentral, Hong Kong",
+                  },
+                  {
+                    icon: Mail,
+                    label: "Email",
+                    detail: "info@brookletadvisory.com",
+                  },
+                  {
+                    icon: Phone,
+                    label: "Phone",
+                    detail: "+852 9240 9588",
+                  },
+                ].map((item) => {
+                  const Icon = item.icon;
                   return (
                     <div key={item.label} className="flex gap-4">
                       <div
@@ -173,11 +182,14 @@ export function Contact() {
               </div>
             </div>
 
-            {/* Quote block */}
+            {/* Forest stream quote block */}
             <div
               className="p-6"
               style={{
                 background: "linear-gradient(145deg, #162B22, #1E3428)",
+                borderTop: "none",
+                borderRight: "none",
+                borderBottom: "none",
                 borderLeft: "2px solid #5A9E84",
               }}
             >
@@ -190,53 +202,19 @@ export function Contact() {
                   lineHeight: 1.78,
                 }}
               >
-                {c.quote}
+                "We deliver compliant solutions that are commercially sound."
               </p>
               <div style={{ height: "1px", background: "rgba(90,158,132,0.2)" }} className="mb-3" />
-              <div className="flex items-center gap-2">
-                <span
-                  lang="en"
-                  style={{
-                    fontFamily: "'Candara', sans-serif",
-                    fontLanguageOverride: "normal",
-                    fontSize: "14px",
-                    letterSpacing: "0.16em",
-                    color: "#ffffff"
-                  }}
-                >
-                  BROOKLET
-                </span>
-                <span
-                  style={{
-                    fontSize: "13px",
-                    letterSpacing: "0.05em",
-                    color: "#ffffff"
-                  }}
-                >
-                  初源
-                </span>
-                <span
-                  lang="en"
-                  style={{
-                    fontFamily: "'Candara', sans-serif",
-                    fontLanguageOverride: "normal",
-                    fontSize: "14px",
-                    letterSpacing: "0.16em",
-                    color: "#7DBFA4"
-                  }}
-                >
-                  ADVISORY
-                </span>
-                <span
-                  style={{
-                    fontSize: "13px",
-                    letterSpacing: "0.05em",
-                    color: "#7DBFA4"
-                  }}
-                >
-                  咨询
-                </span>
-              </div>
+              <span
+                style={{
+                  fontFamily: "'Candara', sans-serif",
+                  fontSize: "14px",
+                  letterSpacing: "0.16em",
+                }}
+              >
+                <span style={{ color: "#ffffff" }}>BROOKLET</span>
+                <span style={{ color: "#7DBFA4" }}> ADVISORY</span>
+              </span>
             </div>
           </div>
 
@@ -264,7 +242,7 @@ export function Contact() {
                     fontWeight: 300,
                   }}
                 >
-                  {f.successTitle}
+                  Message Received
                 </h3>
                 <p
                   style={{
@@ -275,7 +253,7 @@ export function Contact() {
                     lineHeight: 1.85,
                   }}
                 >
-                  {f.successBody}
+                  Your message has been sent. We will be in touch shortly.
                 </p>
               </div>
             ) : (
@@ -294,7 +272,7 @@ export function Contact() {
                       className="block mb-2 text-white/45"
                       style={{ fontFamily: "'Candara', sans-serif", fontSize: "14px", letterSpacing: "0.14em" }}
                     >
-                      {f.fullName}
+                      FULL NAME *
                     </label>
                     <input
                       type="text"
@@ -305,7 +283,7 @@ export function Contact() {
                       onFocus={() => setFocused("name")}
                       onBlur={() => setFocused(null)}
                       style={inputStyle("name")}
-                      placeholder={f.placeholderName}
+                      placeholder="Your full name"
                     />
                   </div>
                   <div>
@@ -313,7 +291,7 @@ export function Contact() {
                       className="block mb-2 text-white/45"
                       style={{ fontFamily: "'Candara', sans-serif", fontSize: "14px", letterSpacing: "0.14em" }}
                     >
-                      {f.company}
+                      COMPANY
                     </label>
                     <input
                       type="text"
@@ -323,7 +301,7 @@ export function Contact() {
                       onFocus={() => setFocused("company")}
                       onBlur={() => setFocused(null)}
                       style={inputStyle("company")}
-                      placeholder={f.placeholderCompany}
+                      placeholder="Your organisation"
                     />
                   </div>
                 </div>
@@ -334,7 +312,7 @@ export function Contact() {
                       className="block mb-2 text-white/45"
                       style={{ fontFamily: "'Candara', sans-serif", fontSize: "14px", letterSpacing: "0.14em" }}
                     >
-                      {f.email}
+                      EMAIL ADDRESS *
                     </label>
                     <input
                       type="email"
@@ -345,7 +323,7 @@ export function Contact() {
                       onFocus={() => setFocused("email")}
                       onBlur={() => setFocused(null)}
                       style={inputStyle("email")}
-                      placeholder={f.placeholderEmail}
+                      placeholder="your@email.com"
                     />
                   </div>
                   <div>
@@ -353,7 +331,7 @@ export function Contact() {
                       className="block mb-2 text-white/45"
                       style={{ fontFamily: "'Candara', sans-serif", fontSize: "14px", letterSpacing: "0.14em" }}
                     >
-                      {f.phone}
+                      PHONE NUMBER
                     </label>
                     <input
                       type="tel"
@@ -363,7 +341,7 @@ export function Contact() {
                       onFocus={() => setFocused("phone")}
                       onBlur={() => setFocused(null)}
                       style={inputStyle("phone")}
-                      placeholder={f.placeholderPhone}
+                      placeholder="+852/+86 XXXX XXXX"
                     />
                   </div>
                 </div>
@@ -373,7 +351,7 @@ export function Contact() {
                     className="block mb-2 text-white/45"
                     style={{ fontFamily: "'Candara', sans-serif", fontSize: "14px", letterSpacing: "0.14em" }}
                   >
-                    {f.service}
+                    SERVICE OF INTEREST
                   </label>
                   <select
                     name="service"
@@ -383,10 +361,12 @@ export function Contact() {
                     onBlur={() => setFocused(null)}
                     style={{ ...inputStyle("service"), appearance: "none" as const }}
                   >
-                    <option value="" style={{ background: DARK_PANEL }}>{f.selectDefault}</option>
-                    {f.options.map((opt) => (
-                      <option key={opt} value={opt} style={{ background: DARK_PANEL }}>{opt}</option>
-                    ))}
+                    <option value="" style={{ background: DARK_PANEL }}>Select a service...</option>
+                    <option value="Licensing & Registration" style={{ background: DARK_PANEL }}>Licensing & Registration</option>
+                    <option value="Ongoing Compliance Advisory" style={{ background: DARK_PANEL }}>Ongoing Compliance Advisory</option>
+                    <option value="Regulatory Inspection Support" style={{ background: DARK_PANEL }}>Regulatory Inspection Support</option>
+                    <option value="Specialised Advisory & Training" style={{ background: DARK_PANEL }}>Specialised Advisory & Training</option>
+                    <option value="Other" style={{ background: DARK_PANEL }}>Other</option>
                   </select>
                 </div>
 
@@ -395,7 +375,7 @@ export function Contact() {
                     className="block mb-2 text-white/45"
                     style={{ fontFamily: "'Candara', sans-serif", fontSize: "14px", letterSpacing: "0.14em" }}
                   >
-                    {f.message}
+                    YOUR MESSAGE *
                   </label>
                   <input
                     type="text"
@@ -406,10 +386,11 @@ export function Contact() {
                     onFocus={() => setFocused("message")}
                     onBlur={() => setFocused(null)}
                     style={inputStyle("message")}
-                    placeholder={f.placeholderMessage}
+                    placeholder="Tell us about your compliance needs..."
                   />
                 </div>
 
+                {/* Error message */}
                 {errorMsg && (
                   <div
                     className="mb-5 px-4 py-3"
@@ -440,7 +421,7 @@ export function Contact() {
                     border: "none",
                   }}
                 >
-                  <span>{sending ? f.sending : f.send}</span>
+                  <span>{sending ? "SENDING..." : "SEND MESSAGE"}</span>
                   {!sending && <Send size={13} />}
                 </button>
               </form>

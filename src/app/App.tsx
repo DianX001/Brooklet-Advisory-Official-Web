@@ -1,5 +1,3 @@
-import { LanguageProvider } from "./LanguageContext";
-import { CursorGlow } from "./components/CursorGlow";
 import { Navbar } from "./components/Navbar";
 import { Hero } from "./components/Hero";
 import { About } from "./components/About";
@@ -49,9 +47,7 @@ const LIGHT = "#EDF2EE"; // cool sage-white
 
 export default function App() {
   return (
-    <LanguageProvider>
-      <div className="min-h-screen" style={{ fontFamily: "'Candara', sans-serif" }}>
-        <CursorGlow />
+    <div className="min-h-screen" style={{ fontFamily: "'Candara', sans-serif" }}>
       <Navbar />
       <Hero />
 
@@ -82,6 +78,5 @@ export default function App() {
 
       <Footer />
     </div>
-    </LanguageProvider>
   );
 }

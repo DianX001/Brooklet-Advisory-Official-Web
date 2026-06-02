@@ -1,11 +1,31 @@
-import { motion, useReducedMotion } from "motion/react";
-import { useLanguage } from "../LanguageContext";
+const edges = [
+  {
+    number: "-01",
+    title: "Former Regulators & Enforcers",
+    detail:
+      "Our firsthand experience within HKEX Enforcement provides a practical understanding of how regulators assess compliance and manage risk — we know what they look for because we have looked ourselves.",
+  },
+  {
+    number: "-02",
+    title: "Commercial-to-Compliance Perspective",
+    detail:
+      "With decades of experience in global investment banks and front-office roles at HSBC, CITIC Securities, and Goldman Sachs, we understand the commercial realities and operational pressures you face.",
+  },
+  {
+    number: "-03",
+    title: "Proven Institutional Scale",
+    detail:
+      "Our leadership has supported the compliance needs of over 140+ financial institutions, ranging from global investment banks to boutique asset managers across Asia.",
+  },
+  {
+    number: "-04",
+    title: "Cross-Border Specialists",
+    detail:
+      "Deep expertise bridging Mainland China, Macao, and Hong Kong regulatory frameworks, including SFC, HKEX, MAS, and AMCM — with native linguistic and regulatory fluency.",
+  },
+];
 
 export function WhyUs() {
-  const shouldReduceMotion = useReducedMotion();
-  const { t } = useLanguage();
-  const w = t.whyUs;
-
   return (
     <section id="why-us" className="py-24 md:py-32" style={{ background: "#EDF2EE" }}>
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
@@ -21,7 +41,7 @@ export function WhyUs() {
                 className="text-[#3E8A72] tracking-[0.32em] uppercase text-[14px]"
                 style={{ fontFamily: "'Candara', sans-serif" }}
               >
-                {w.label}
+                The Brooklet Edge
               </span>
             </div>
 
@@ -35,29 +55,7 @@ export function WhyUs() {
                 color: "#0D1F0E",
               }}
             >
-              <motion.span
-                className="block"
-                initial={{ opacity: shouldReduceMotion ? 1 : 0, y: shouldReduceMotion ? 0 : 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-10%" }}
-                transition={{
-                  duration: shouldReduceMotion ? 0 : 2.7,
-                  ease: [0.16, 1, 0.3, 1],
-                }}
-              >
-                {w.h2}{" "}
-                <motion.em
-                  initial={{ opacity: shouldReduceMotion ? 1 : 0, y: shouldReduceMotion ? 0 : 15 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-10%" }}
-                  transition={{
-                    duration: shouldReduceMotion ? 0 : 2.7,
-                    ease: [0.16, 1, 0.3, 1],
-                    delay: shouldReduceMotion ? 0 : 0.6
-                  }}
-                  style={{ fontStyle: "italic", color: "#3E8A72", display: "inline-block" }}
-                >{w.h2accent}</motion.em>
-              </motion.span>
+              Why <em style={{ fontStyle: "italic", color: "#3E8A72" }}>Brooklet?</em>
             </h2>
 
             <p
@@ -68,7 +66,9 @@ export function WhyUs() {
                 lineHeight: 1.9,
               }}
             >
-              {w.body}
+              We believe compliance should be a business enabler, not a barrier.
+              Our edge is built on practicality, experience, reliability, and
+              regional fluency, not just knowledge of rules.
             </p>
 
             {/* Decorative rule */}
@@ -105,17 +105,18 @@ export function WhyUs() {
                   fontSize: "0.75rem",
                   lineHeight: 1.7,
                   letterSpacing: "0.04em",
-                  whiteSpace: "pre-line",
                 }}
               >
-                {w.statLabel}
+                Financial institutions supported
+                <br />
+                across Asia
               </div>
             </div>
           </div>
 
           {/* Right: 2×2 edge cards */}
           <div className="lg:col-span-3 grid sm:grid-cols-2 gap-px" style={{ background: "rgba(62,138,114,0.12)" }}>
-            {w.edges.map((edge) => (
+            {edges.map((edge) => (
               <div
                 key={edge.title}
                 className="group p-8 transition-all duration-300"
