@@ -1,15 +1,11 @@
 import { motion, useReducedMotion } from "motion/react";
-
-const stats = [
-  { value: "140+", label: "Institutional Clients" },
-  { value: "25+", label: "Years in Financial Industry" },
-  { value: "4", label: "Regulatory Frameworks\n(SFC · HKEX · MAS · AMCM)" },
-  { value: "3", label: "Markets\n(Hong Kong, Macao, Mainland)" },
-];
+import { useLanguage } from "../LanguageContext";
 
 export function About() {
   const shouldReduceMotion = useReducedMotion();
-  
+  const { t } = useLanguage();
+  const a = t.about;
+
   return (
     <section id="about" className="py-24 md:py-32" style={{ background: "#EDF2EE" }}>
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
@@ -17,7 +13,7 @@ export function About() {
 
           {/* Stats — left column on desktop, below text on mobile */}
           <div className="order-2 lg:order-1 grid grid-cols-2 gap-5 lg:self-center">
-            {stats.map((stat) => (
+            {a.stats.map((stat) => (
               <div
                 key={stat.label}
                 className="pl-4"
@@ -60,7 +56,7 @@ export function About() {
                 className="text-[#3E8A72] tracking-[0.32em] uppercase text-[13px]"
                 style={{ fontFamily: "'Candara', sans-serif" }}
               >
-                About Brooklet
+                {a.label}
               </span>
             </div>
 
@@ -84,7 +80,7 @@ export function About() {
                   ease: [0.16, 1, 0.3, 1],
                 }}
               >
-                Regulatory Expertise,
+                {a.h2line1}
               </motion.span>
               <motion.em
                 className="block"
@@ -98,7 +94,7 @@ export function About() {
                 }}
                 style={{ fontStyle: "italic", color: "#3E8A72" }}
               >
-                Commercially Sound.
+                {a.h2line2}
               </motion.em>
             </h2>
 
@@ -111,11 +107,7 @@ export function About() {
                 fontSize: "15px",
               }}
             >
-              Brooklet Advisory is a specialist consulting firm providing expert guidance on
-              Hong Kong's regulatory landscape. Founded by industry professionals who combine
-              decades of in-house experience at global investment banks, brokerages, asset
-              management firms, and the Hong Kong Exchanges with strong legal and compliance
-              credentials.
+              {a.p1}
             </p>
 
             <p
@@ -126,7 +118,9 @@ export function About() {
                 lineHeight: 1.9,
                 fontSize: "15px",
               }}
-            > Our practical approach helps clients navigate licensing, manage ongoing compliance obligations, and confidently handle regulatory scrutiny — delivering solutions that are both compliant and commercially sound.</p>
+            >
+              {a.p2}
+            </p>
           </div>
 
         </div>

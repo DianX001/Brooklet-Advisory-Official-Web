@@ -1,7 +1,12 @@
+import { useLanguage } from "../LanguageContext";
+
 const FOOTER_BG = "#13201A";
 const LIGHT_BG = "#EDF2EE";
 
 export function Footer() {
+  const { t, lang } = useLanguage();
+  const f = t.footer;
+
   const scrollTo = (href: string) => {
     document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
   };
@@ -34,17 +39,32 @@ export function Footer() {
 
           {/* Brand column */}
           <div className="md:col-span-2">
-            <div className="flex items-center gap-3 mb-6">
-              <span className="flex flex-col items-start gap-0">
-                <span
-                  className="text-white text-xl leading-tight"
-                  style={{ fontFamily: "'Candara', sans-serif", letterSpacing: "0.1em" }}
-                >BROOKLET</span>
-                <span
-                  className="leading-tight text-[20px]"
-                  style={{ fontFamily: "'Candara', sans-serif", letterSpacing: "0.1em", color: "#7DBFA4" }}
-                >ADVISORY</span>
-              </span>
+            <div 
+              className="grid items-baseline mb-6" 
+              style={{ 
+                gridTemplateColumns: "max-content max-content", 
+                columnGap: "14px", 
+                rowGap: "4px" 
+              }}
+            >
+              <span
+                lang="en"
+                className="text-white text-[20px] leading-none"
+                style={{ fontFamily: "Candara, 'Segoe UI', Arial, sans-serif", fontLanguageOverride: "normal", letterSpacing: "0.1em", fontWeight: 700 }}
+              >BROOKLET</span>
+              <span
+                className="text-white text-[17px] leading-none"
+                style={{ fontFamily: "'Noto Serif SC', 'SimSun', serif", letterSpacing: "0.1em", fontWeight: 700 }}
+              >初源</span>
+              <span
+                lang="en"
+                className="text-[20px] leading-none"
+                style={{ fontFamily: "Candara, 'Segoe UI', Arial, sans-serif", fontLanguageOverride: "normal", letterSpacing: "0.1em", color: "#7DBFA4", fontWeight: 700 }}
+              >ADVISORY</span>
+              <span
+                className="text-[17px] leading-none"
+                style={{ fontFamily: "'Noto Serif SC', 'SimSun', serif", letterSpacing: "0.1em", color: "#7DBFA4", fontWeight: 700 }}
+              >咨询</span>
             </div>
             <p
               className="mb-6 max-w-xs"
@@ -55,18 +75,17 @@ export function Footer() {
                 lineHeight: 1.9,
               }}
             >
-              A Hong Kong specialist consultancy helping financial institutions
-              with licensing, compliance, and regulatory scrutiny.
+              {f.tagline}
             </p>
             <div
               style={{
-                fontFamily: "'Candara', sans-serif",
+                fontFamily: lang === "zh" ? "'Noto Serif SC', serif" : "'Candara', sans-serif",
                 color: "rgba(255,255,255,0.18)",
                 lineHeight: 1.75,
                 fontSize: "13px",
               }}
             >
-              Level 20, One IFC · Central, Hong Kong
+              {lang === "zh" ? "香港中环国际金融中心一期20楼" : "Level 20, One IFC · Central, Hong Kong"}
             </div>
           </div>
 
@@ -81,16 +100,10 @@ export function Footer() {
                 letterSpacing: "0.22em",
               }}
             >
-              NAVIGATION
+              {f.navigation}
             </h4>
             <ul className="space-y-3">
-              {[
-                { label: "About Us", href: "#about" },
-                { label: "Services", href: "#services" },
-                { label: "The Brooklet Edge", href: "#why-us" },
-                { label: "Our Team", href: "#team" },
-                { label: "Contact", href: "#contact" },
-              ].map((link) => (
+              {f.navLinks.map((link) => (
                 <li key={link.href}>
                   <button
                     onClick={() => scrollTo(link.href)}
@@ -115,17 +128,10 @@ export function Footer() {
                 letterSpacing: "0.22em",
               }}
             >
-              SERVICES
+              {f.services}
             </h4>
             <ul className="space-y-3">
-              {[
-                "Licensing & Registration",
-                "Ongoing Compliance Advisory",
-                "Regulatory Inspection Support",
-                "Specialised Advisory",
-                "Compliance Training",
-                "M&A Support",
-              ].map((service) => (
+              {f.serviceLinks.map((service) => (
                 <li key={service}>
                   <span
                     className="text-white/35"
@@ -153,7 +159,7 @@ export function Footer() {
                 fontSize: "0.72rem",
               }}
             >
-              © 2025 Brooklet Advisory Limited. All rights reserved.
+              {f.copyright}
             </div>
             <div
               style={{
@@ -164,12 +170,11 @@ export function Footer() {
                 maxWidth: "480px",
               }}
             >
-              Brooklet Advisory Limited is not a law firm or tax advisor. All information
-              provided is for general purposes only and does not constitute legal or tax advice.
+              {f.disclaimer}
             </div>
           </div>
 
-          {/* Brooklet ripple motif — tiny, intimate */}
+          {/* Brooklet ripple motif */}
           <div className="flex items-end gap-1.5" style={{ opacity: 0.28 }}>
             {[2, 3, 4, 3, 2].map((size, i) => (
               <div
@@ -187,13 +192,16 @@ export function Footer() {
           </div>
 
           <div className="flex gap-5">
-            {["Privacy Policy", "Terms of Use"].map((item) => (
+            {[
+              { key: "privacyPolicy", label: f.privacyPolicy },
+              { key: "termsOfUse", label: f.termsOfUse },
+            ].map((item) => (
               <button
-                key={item}
+                key={item.key}
                 className="text-white/18 hover:text-white/38 transition-colors duration-300 bg-transparent border-none cursor-pointer p-0"
                 style={{ fontFamily: "'Candara', sans-serif", fontSize: "0.72rem", letterSpacing: "0.04em" }}
               >
-                {item}
+                {item.label}
               </button>
             ))}
           </div>

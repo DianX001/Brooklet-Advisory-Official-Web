@@ -1,13 +1,12 @@
 import { ChevronDown } from "lucide-react";
 import ConceptMap from "../../imports/concept_map.jpg";
 import { motion, useReducedMotion } from "motion/react";
+import { useLanguage } from "../LanguageContext";
 
 export function Hero() {
   const shouldReduceMotion = useReducedMotion();
-
-  const scrollToAbout = () => {
-    document.querySelector("#about")?.scrollIntoView({ behavior: "smooth" });
-  };
+  const { t, lang } = useLanguage();
+  const h = t.hero;
 
   return (
     <section
@@ -26,7 +25,6 @@ export function Hero() {
         }}
       />
 
-      {/* Deep forest vignette — adjusted to match the lighter concept map tones */}
       <div
         className="absolute inset-0"
         style={{
@@ -34,7 +32,6 @@ export function Hero() {
         }}
       />
 
-      {/* Left/right edge darkening — lighter shade */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
@@ -42,7 +39,6 @@ export function Hero() {
         }}
       />
 
-      {/* Soft golden sunbeam from upper right — dappled canopy light */}
       <div
         className="absolute top-0 right-0 w-2/3 h-2/3 pointer-events-none"
         style={{
@@ -50,7 +46,6 @@ export function Hero() {
           animation: "dapple 8s ease-in-out infinite",
         }}
       />
-      {/* Secondary soft light — more subtle */}
       <div
         className="absolute bottom-1/3 left-1/4 w-1/2 h-1/2 pointer-events-none"
         style={{
@@ -66,8 +61,8 @@ export function Hero() {
           <div className="h-px w-10 bg-[#8EC5AD]/60" />
           <span
             className="text-[#C8EAE0] text-sm tracking-[0.35em] uppercase"
-            style={{ fontFamily: "'Candara', sans-serif" }}
-          >Compliance Advisory</span>
+            style={{ fontFamily: lang === "zh" ? "'Noto Serif SC', serif" : "'Candara', sans-serif" }}
+          >{h.label}</span>
           <div className="h-px w-10 bg-[#8EC5AD]/60" />
         </div>
 
@@ -75,7 +70,7 @@ export function Hero() {
         <h1
           className="text-white mb-6"
           style={{
-            fontFamily: "'Candara', sans-serif",
+            fontFamily: lang === "zh" ? "'Noto Serif SC', serif" : "'Candara', sans-serif",
             fontSize: "65px",
             fontWeight: 500,
             lineHeight: 1.08,
@@ -93,36 +88,51 @@ export function Hero() {
               delay: shouldReduceMotion ? 0 : 1.2
             }}
           >
-            Where Clarity
+            {lang === "zh" ? (
+              <>
+                初源<span style={{ color: "#7DBFA4", fontWeight: 500 }}>咨询，</span>
+              </>
+            ) : (
+              <>
+                Brooklet <span style={{ color: "#7DBFA4", fontWeight: 500 }}>Advisory,</span>
+              </>
+            )}
           </motion.span>
-          <motion.em
+          <motion.span
             className="block"
             initial={{ opacity: shouldReduceMotion ? 1 : 0, y: shouldReduceMotion ? 0 : 20, scale: shouldReduceMotion ? 1 : 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{
               duration: shouldReduceMotion ? 0 : 3.6,
               ease: [0.16, 1, 0.3, 1],
-              delay: shouldReduceMotion ? 0 : 1.2
+              delay: shouldReduceMotion ? 0 : 1.8
             }}
-            style={{ fontStyle: "italic", color: "#9DCFBC" }}
           >
-            Flows
-          </motion.em>
+            {lang === "zh" ? (
+              <>
+                于细微处见<em style={{ fontStyle: "italic", color: "#7DBFA4", fontWeight: 500 }}>清晰</em>
+              </>
+            ) : (
+              <>
+                {h.line2}{" "}
+                <em style={{ fontStyle: "italic", color: "#7DBFA4", fontWeight: 500 }}>{h.accent}</em>
+              </>
+            )}
+          </motion.span>
         </h1>
 
         {/* Tagline */}
         <p
           className="text-white/80 mb-14 max-w-lg mx-auto"
           style={{
-            fontFamily: "'Candara', sans-serif",
+            fontFamily: lang === "zh" ? "'Noto Serif SC', serif" : "'Candara', sans-serif",
             fontSize: "0.95rem",
             letterSpacing: "0.03em",
             lineHeight: 1.85,
             textShadow: "0 1px 10px rgba(8,18,10,0.7)",
           }}
         >
-          A Hong Kong specialist consultancy helping financial institutions
-          with licensing, compliance, and regulatory scrutiny.
+          {h.tagline}
         </p>
 
         {/* CTA buttons */}
@@ -137,20 +147,17 @@ export function Hero() {
               border: "none",
             }}
           >
-            OUR SERVICES
+            {h.ctaServices}
           </button>
           <button
             onClick={() => document.querySelector("#about")?.scrollIntoView({ behavior: "smooth" })}
             className="px-8 py-3.5 border border-white/20 text-white/85 text-sm tracking-[0.18em] cursor-pointer hover:border-[#8EC5AD]/60 hover:text-[#B4DFD0] transition-all duration-300"
             style={{ fontFamily: "'Candara', sans-serif" }}
           >
-            LEARN MORE
+            {h.ctaLearn}
           </button>
         </div>
       </div>
-
-      {/* Scroll indicator */}
-      
 
       <style>{`
         @keyframes dapple {

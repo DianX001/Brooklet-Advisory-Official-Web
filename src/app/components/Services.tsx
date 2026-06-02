@@ -1,74 +1,16 @@
 import { FileCheck, ShieldCheck, Search, Lightbulb } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
+import { useLanguage } from "../LanguageContext";
 
-const services = [
-  {
-    icon: FileCheck,
-    number: "01",
-    title: "Licensing & Registration",
-    tagline: "Market Entry & Authorisation",
-    description:
-      "End-to-end guidance through every stage of the application and approval process, from initial scoping to final authorisation.",
-    bullets: [
-      "SFC licence applications (Types 1–10)",
-      "SFC Virtual Asset (VA) licensing & uplifts",
-      "HKEX (SEHK & HKFE) Exchange Participantship",
-      "HKEX China Connect (CCEP / TTEP) registration",
-      "HKEX Market Maker Permit applications",
-    ],
-  },
-  {
-    icon: ShieldCheck,
-    number: "02",
-    title: "Ongoing Compliance Advisory",
-    tagline: "Compliance Outsourcing",
-    description:
-      "Acting as your trusted, outsourced compliance partner — embedded in your operations, covering both SFC and HKEX obligations.",
-    bullets: [
-      "AML/CFT frameworks & KYC / investor suitability",
-      "Cross-border fundraising & product distribution rules",
-      "Pre-trade & post-trade controls, error trade advisory",
-      "AI Governance policies and procedures",
-      "BCAN generation & Northbound Investor ID Model",
-    ],
-  },
-  {
-    icon: Search,
-    number: "03",
-    title: "Regulatory Inspection Support",
-    tagline: "Regulatory Defense & Crisis Management",
-    description:
-      "Preparing you for and guiding you through regulatory scrutiny — from proactive readiness to real-time inspection support.",
-    bullets: [
-      "SFC & HKEX on-site inspection readiness",
-      "Mock regulatory audits & gap analyses",
-      "Thematic review preparation",
-      "Assistance with formal regulatory inquiries",
-      "Incident remediation planning",
-    ],
-  },
-  {
-    icon: Lightbulb,
-    number: "04",
-    title: "Specialised Advisory",
-    tagline: "Project Support & Training",
-    description:
-      "Targeted expertise for critical business events, policy needs, and capability building across your compliance function.",
-    bullets: [
-      "CPT-eligible compliance training for staff",
-      "Compliance Manuals, PA Dealing & BCP drafting",
-      "Incident response & remediation guidance",
-      "M&A support for SFC licensed corporations",
-      "Fund lifecycle compliance",
-    ],
-  },
-];
+const icons = [FileCheck, ShieldCheck, Search, Lightbulb];
 
 const DARK_BG = "#1E3428";
 
 export function Services() {
   const shouldReduceMotion = useReducedMotion();
-  
+  const { t } = useLanguage();
+  const s = t.services;
+
   return (
     <section id="services" className="py-24 md:py-32" style={{ background: DARK_BG }}>
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
@@ -81,7 +23,7 @@ export function Services() {
               className="text-[#7DBFA4]/65 tracking-[0.32em] uppercase text-[14px]"
               style={{ fontFamily: "'Candara', sans-serif" }}
             >
-              What We Do
+              {s.label}
             </span>
             <div className="h-px w-10 bg-[#7DBFA4]/25" />
           </div>
@@ -101,7 +43,7 @@ export function Services() {
               ease: [0.16, 1, 0.3, 1],
             }}
           >
-            Our Services
+            {s.h2}
           </motion.h2>
           <p
             className="mt-4 max-w-lg mx-auto"
@@ -112,15 +54,14 @@ export function Services() {
               lineHeight: 1.85,
             }}
           >
-            End-to-end support across the full business lifecycle, from market entry
-            to ongoing compliance and regulatory defense.
+            {s.subtitle}
           </p>
         </div>
 
         {/* Services Grid — 2×2 */}
         <div className="grid md:grid-cols-2 gap-px" style={{ background: "rgba(255,255,255,0.04)" }}>
-          {services.map((service) => {
-            const Icon = service.icon;
+          {s.items.map((service, idx) => {
+            const Icon = icons[idx];
             return (
               <div
                 key={service.title}
@@ -143,14 +84,7 @@ export function Services() {
                 <div className="relative z-10">
                   {/* Number + Icon row */}
                   <div className="flex items-start justify-between mb-7">
-                    
-                    <span
-                      style={{
-                        display: "none",
-                      }}
-                    >
-                      {service.number}
-                    </span>
+                    <span style={{ display: "none" }}>{service.number}</span>
                   </div>
 
                   {/* Title */}
@@ -176,8 +110,6 @@ export function Services() {
                   >
                     {service.tagline.toUpperCase()}
                   </div>
-
-                  
 
                   {/* Bullet points */}
                   <ul className="space-y-2">
