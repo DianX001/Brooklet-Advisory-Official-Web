@@ -1,31 +1,11 @@
-const edges = [
-  {
-    number: "-01",
-    title: "Former Regulators & Enforcers",
-    detail:
-      "Our firsthand experience within HKEX Enforcement provides a practical understanding of how regulators assess compliance and manage risk — we know what they look for because we have looked ourselves.",
-  },
-  {
-    number: "-02",
-    title: "Commercial-to-Compliance Perspective",
-    detail:
-      "With decades of experience in global investment banks and front-office roles at HSBC, CITIC Securities, and Goldman Sachs, we understand the commercial realities and operational pressures you face.",
-  },
-  {
-    number: "-03",
-    title: "Proven Institutional Scale",
-    detail:
-      "Our leadership has supported the compliance needs of over 140+ financial institutions, ranging from global investment banks to boutique asset managers across Asia.",
-  },
-  {
-    number: "-04",
-    title: "Cross-Border Specialists",
-    detail:
-      "Deep expertise bridging Mainland China, Macao, and Hong Kong regulatory frameworks, including SFC, HKEX, MAS, and AMCM — with native linguistic and regulatory fluency.",
-  },
-];
+import { motion, useReducedMotion } from "motion/react";
+import { useLanguage } from "../LanguageContext";
 
 export function WhyUs() {
+  const shouldReduceMotion = useReducedMotion();
+  const { t } = useLanguage();
+  const w = t.whyUs;
+
   return (
     <section id="why-us" className="py-24 md:py-32" style={{ background: "#EDF2EE" }}>
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
@@ -39,36 +19,53 @@ export function WhyUs() {
               <div className="h-px w-6 bg-[#3E8A72]" />
               <span
                 className="text-[#3E8A72] tracking-[0.32em] uppercase text-[14px]"
-                style={{ fontFamily: "'Candara', sans-serif" }}
-              >
-                The Brooklet Edge
-              </span>
+                dangerouslySetInnerHTML={{ __html: w.label }}
+              />
             </div>
 
             <h2
               className="mb-8"
               style={{
-                fontFamily: "'Candara', sans-serif",
                 fontSize: "clamp(2rem, 3.8vw, 3rem)",
                 fontWeight: 400,
                 lineHeight: 1.2,
                 color: "#0D1F0E",
               }}
             >
-              Why <em style={{ fontStyle: "italic", color: "#3E8A72" }}>Brooklet?</em>
+              <motion.span
+                className="block"
+                initial={{ opacity: shouldReduceMotion ? 1 : 0, y: shouldReduceMotion ? 0 : 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-10%" }}
+                transition={{
+                  duration: shouldReduceMotion ? 0 : 2.7,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
+              >
+                {w.h2}{" "}
+                <motion.em
+                  initial={{ opacity: shouldReduceMotion ? 1 : 0, y: shouldReduceMotion ? 0 : 15 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-10%" }}
+                  transition={{
+                    duration: shouldReduceMotion ? 0 : 2.7,
+                    ease: [0.16, 1, 0.3, 1],
+                    delay: shouldReduceMotion ? 0 : 0.6
+                  }}
+                  style={{ fontStyle: "italic", color: "#3E8A72", display: "inline-block" }}
+                dangerouslySetInnerHTML={{ __html: w.h2accent }}
+                />
+              </motion.span>
             </h2>
 
             <p
               style={{
-                fontFamily: "'Candara', sans-serif",
                 color: "#2E4A38",
                 fontSize: "0.875rem",
                 lineHeight: 1.9,
               }}
             >
-              We believe compliance should be a business enabler, not a barrier.
-              Our edge is built on practicality, experience, reliability, and
-              regional fluency, not just knowledge of rules.
+              {w.body}
             </p>
 
             {/* Decorative rule */}
@@ -88,7 +85,6 @@ export function WhyUs() {
             >
               <div
                 style={{
-                  fontFamily: "'Candara', sans-serif",
                   fontSize: "2.5rem",
                   fontWeight: 300,
                   color: "#9DCFBC",
@@ -100,23 +96,21 @@ export function WhyUs() {
               <div
                 className="mt-2"
                 style={{
-                  fontFamily: "'Candara', sans-serif",
                   color: "rgba(255,255,255,0.45)",
                   fontSize: "0.75rem",
                   lineHeight: 1.7,
                   letterSpacing: "0.04em",
+                  whiteSpace: "pre-line",
                 }}
               >
-                Financial institutions supported
-                <br />
-                across Asia
+                {w.statLabel}
               </div>
             </div>
           </div>
 
           {/* Right: 2×2 edge cards */}
           <div className="lg:col-span-3 grid sm:grid-cols-2 gap-px" style={{ background: "rgba(62,138,114,0.12)" }}>
-            {edges.map((edge) => (
+            {w.edges.map((edge) => (
               <div
                 key={edge.title}
                 className="group p-8 transition-all duration-300"
@@ -125,7 +119,6 @@ export function WhyUs() {
                 <div
                   className="mb-5"
                   style={{
-                    fontFamily: "'Candara', sans-serif",
                     color: "rgba(62,138,114,0.75)",
                     fontSize: "13px",
                     letterSpacing: "0.2em",
@@ -136,7 +129,6 @@ export function WhyUs() {
                 <h3
                   className="mb-3"
                   style={{
-                    fontFamily: "'Candara', sans-serif",
                     fontSize: "19px",
                     fontWeight: 500,
                     color: "#0D1F0E",
@@ -151,7 +143,6 @@ export function WhyUs() {
                 />
                 <p
                   style={{
-                    fontFamily: "'Candara', sans-serif",
                     color: "#2E4A38",
                     fontSize: "15px",
                     lineHeight: 1.85,
