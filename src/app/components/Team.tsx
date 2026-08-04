@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import ThomasImg from "../../imports/TU.jpg";
 import BenImg from "../../imports/BL.png";
+import KelvinImg from "../../imports/Kelvin__.png";
+import JoyceImg from "../../imports/JX.jpg";
 import { motion, useReducedMotion } from "motion/react";
 import { useLanguage } from "../LanguageContext";
 
-const photos = [ThomasImg, BenImg];
-const photoScales = [1.15, 1.1];
+const photos = [ThomasImg, BenImg, KelvinImg, JoyceImg];
+const photoScales = [1.15, 1.1, 1.05, 1.05];
 
 const DARK_BG = "#1E3428";
 
@@ -211,7 +213,7 @@ export function Team() {
         </div>
 
         {/* Team — 2-column */}
-        <div className="flex flex-wrap justify-center gap-[7rem]">
+        <div className="flex flex-wrap justify-center gap-[2.5rem]">
           {team.map((member) => (
             <div
               key={member.name}
@@ -305,6 +307,7 @@ export function Team() {
                         color: "rgba(125,191,164,0.7)",
                         fontSize: "12px",
                         letterSpacing: "0.08em",
+                        whiteSpace: "nowrap",
                       }}
                     >
                       {tag}
