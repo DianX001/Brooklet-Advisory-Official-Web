@@ -181,6 +181,7 @@ const en = {
         role: "Senior Advisor",
         yearsValue: "30+",
         yearsLabel: "YEARS AT HKEX",
+
         expertise: ["Exchange Compliance", "Market Surveillance", "Regulatory Inspections"],
         languages: "English · Cantonese · Putonghua",
         bio: [
@@ -194,6 +195,7 @@ const en = {
         role: "Compliance Consultant",
         yearsValue: "5+",
         yearsLabel: "YEARS OF LEGAL TRAINING",
+
         expertise: ["Regulatory Research", "Capital Markets Compliance", "Legal Document Drafting"],
         languages: "English · Cantonese · Putonghua",
         bio: [
@@ -450,6 +452,7 @@ const zh: typeof en = {
         role: "资深顾问",
         yearsValue: "30+",
         yearsLabel: "年港交所经验",
+
         expertise: ["交易所合规", "市场监察", "现场审查"],
         languages: "英语 · 粤语 · 普通话",
         bio: [
@@ -463,6 +466,7 @@ const zh: typeof en = {
         role: "合规顾问",
         yearsValue: "5+",
         yearsLabel: "年法律专业培训",
+
         expertise: ["监管研究", "资本市场合规", "法律文件撰写"],
         languages: "英语 · 粤语 · 普通话",
         bio: [

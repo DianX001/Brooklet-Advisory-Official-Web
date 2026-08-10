@@ -260,6 +260,7 @@ export function Team() {
                       fontSize: "15px",
                       letterSpacing: "0.14em",
                       marginTop: "3px",
+                      whiteSpace: "nowrap",
                     }}
                   >
                     {member.role.toUpperCase()}
@@ -272,7 +273,7 @@ export function Team() {
                 <div style={{ height: "1px", background: "rgba(125,191,164,0.12)" }} className="mb-5" />
 
                 {/* Years stat */}
-                <div className="mb-5">
+                <div className="mb-5" style={{ minHeight: "82px" }}>
                   <div
                     style={{
                       fontSize: "34px",
