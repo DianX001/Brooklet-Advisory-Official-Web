@@ -416,7 +416,7 @@ const zh: typeof en = {
 
   team: {
     label: "专业深耕，洞见有据",
-    h2: "团队",
+    h2: "团队成员",
     subtitle: "前监管官员、前台资深人士及法律专业人士，横跨合规监管的两端。",
     viewBio: "查看完整简历",
     members: [
